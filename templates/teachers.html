@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>老师列表</title>
+</head>
+<body>
+<div>
+    <a href="/add_teachers/">添加</a>
+</div>
+<div>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>任课班级</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for teacher in teacher_list %}
+            <tr>
+                <td>{{ teacher.id }}</td>
+                <td>{{ teacher.name }}</td>
+                <td>{{ teacher.age }}</td>
+                <td>
+                    {% for class in teacher.classes_set.all %}
+                        <span>{{ class.title }}</span>
+                    {% endfor %}
+                </td>
+                <td>
+                        <span>
+                            <a href="/edit_teachers/?nid={{ teacher.id }}">编辑</a>
+                            <a href="/del_teachers/?nid={{ teacher.id }}">删除</a>
+                            <a href="/set_class/?nid={{ teacher.id }}">分配班级</a>
+                        </span>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

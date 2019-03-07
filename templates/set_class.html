@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分配班级</title>
+</head>
+<body>
+<form action="/set_class/?nid={{ nid }}" method="POST">
+    {% csrf_token %}
+    <p>
+        <select multiple name="class_ids">
+            {% for class in all_class_list %}
+                {% if class.id in id_list %}
+                    <option value="{{ class.id }}" selected="selected">{{ class.title }}</option>
+                {% else %}
+                    <option value="{{ class.id }}">{{ class.title }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    </p>
+    <p><input type="submit" value="提交"/></p>
+</form>
+</body>
+</html>
